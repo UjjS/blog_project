@@ -1,0 +1,18 @@
+<!--templates/base.html-->
+{% load static %} <!-- Loads the static template tags to use static files like CSS -->
+<html>
+    <head>
+        <title>Django blog </title> <!-- Sets the page title that appears in browser tab -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet"> <!-- Imports Google Font 'Source Sans Pro' -->
+        <link href="{% static "css/base.css" %}" rel="stylesheet"> <!-- Links the base.css stylesheet using Django's static template tag -->
+    </head>
+    <body>
+<header>
+    <h1><a href="{% url "home" %}">Django blog</a></h1> <!-- Creates a header with a link to home page using Django's URL template tag -->
+</header>
+    <div>
+        {% block content %} <!-- Defines a content block that child templates can override -->
+        {% endblock content %} <!-- Ends the content block -->
+    </div>
+    </body>
+</html>    
