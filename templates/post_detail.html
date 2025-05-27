@@ -1,4 +1,4 @@
-<!--- templates/post_detail.html-->
+<!--- templates/post_detail.html Its a detail_view same as home.html but using detail view instead of List View-->
 {% extends "base.html" %}
 
 {% block content %}
@@ -6,5 +6,9 @@
         <h2>{{detail.title}}</h2>
         <p>{{detail.body}}</p>
     </div>
+    <p>
+        <button onclick="window.location.href='{% url "post_edit" detail.pk %}'" class="btn btn-primary">Edit Blog Post</button>
+        <button onclick="window.location.href='{% url "post_delete" detail.pk %}'" class="btn btn-danger">Delete Blog Post</button>
+    </p>
 {% endblock content %}
 

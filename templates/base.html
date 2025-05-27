@@ -1,18 +1,41 @@
 <!--templates/base.html-->
-{% load static %} <!-- Loads the static template tags to use static files like CSS -->
+{% load static %}
 <html>
     <head>
-        <title>Django blog </title> <!-- Sets the page title that appears in browser tab -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet"> <!-- Imports Google Font 'Source Sans Pro' -->
-        <link href="{% static "css/base.css" %}" rel="stylesheet"> <!-- Links the base.css stylesheet using Django's static template tag -->
+        <title>Django blog</title>
+        <!-- Modern font combinations -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+      
     </head>
     <body>
-<header>
-    <h1><a href="{% url "home" %}">Django blog</a></h1> <!-- Creates a header with a link to home page using Django's URL template tag -->
-</header>
-    <div>
-        {% block content %} <!-- Defines a content block that child templates can override -->
-        {% endblock content %} <!-- Ends the content block -->
-    </div>
+        <header>
+            <div class="nav-left">
+                <h1><a href="{% url 'home' %}">Django blog</a></h1>
+            </div>
+            <div class="nav-right">
+                <a href="{% url 'post_new' %}">+ New Blog Post</a>
+            </div>
+        </header>
+        <!-- This section handles authenticated user display and logout functionality -->
+        <!-- user.is_authenticated checks if the current user is logged in -->
+        <!-- If true, displays username and provides logout form -->
+        <!-- The logout form uses POST method for security (prevents CSRF attacks) -->
+        <!-- CSRF token is required for POST requests in Django -->
+        {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}!</p>
+        <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+        </form>
+        {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
     </body>
-</html>    
+</html>

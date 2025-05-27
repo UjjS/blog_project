@@ -17,7 +17,30 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('accounts/',include('accounts.urls')),
     path('',include('blog.urls')),
 ]
+# This line includes Django's built-in authentication URLs under the 'accounts/' path prefix
+# It provides the following authentication endpoints:
+# - /accounts/login/ - User login page
+# - /accounts/logout/ - User logout functionality
+# - /accounts/password_change/ - Password change form
+# - /accounts/password_reset/ - Password reset request
+# - /accounts/password_reset/done/ - Password reset confirmation
+# - /accounts/reset/<uidb64>/<token>/ - Password reset token validation
+# - /accounts/reset/done/ - Final password reset confirmation
+"""
+URL configuration for blog_project project.
+
+This file defines the main URL patterns for the blog project. It includes:
+1. Admin interface URLs
+2. Blog application URLs
+
+The urlpatterns list contains:
+- admin/: Routes to the Django admin interface
+- '': Includes all URLs from the blog app, making it the root URL pattern
+"""

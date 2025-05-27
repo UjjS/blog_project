@@ -1,11 +1,15 @@
 body {
-    font-family: 'Source Sans Pro',sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
+    margin: 0;
+    padding: 0;
 }
 header {
     border-bottom: 1px solid #999;
     margin-bottom: 2rem;
     display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
 }
 
 header h1 a {
@@ -13,27 +17,99 @@ header h1 a {
     text-decoration: none;
 }
 .nav-left {
-margin-right: auto;
+    margin-right: auto;
 }
 .nav-right {
-display: flex;
-padding-top: 2rem;
+    display: flex;
+    padding-top: 2rem;
 }
 .post-entry {
-margin-bottom: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 2rem;  /* Added horizontal padding */
+    max-width: 1200px;  /* Added max-width for better readability */
+    margin-left: auto;  /* Center the content */
+    margin-right: auto;
 }
 .post-entry h2 {
-margin: 0.5rem 0;
+    margin: 0.5rem 0;
+    padding: 0 1rem;  /* Added padding to title */
 }
 .post-entry h2 a,
 .post-entry h2 a:visited {
-color: blue;
-text-decoration: none;
+    color: blue;
+    text-decoration: none;
 }
 .post-entry p {
-margin: 0;
-font-weight: 400;
+    margin: 0;
+    font-weight: 400;
+    padding: 0 1rem;  /* Added padding to body text */
+    line-height: 1.6;  /* Improved line height for better readability */
 }
 .post-entry h2 a:hover {
     color: red;
+}
+/* Style the edit form text area */
+.edit-form textarea {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #e81313;
+    width: 60%;
+    min-height: 150px;
+    resize: vertical;
+    background-color: #f9f9f9;
+    color: #342929;
+}
+  
+/* Style the submit button */
+.edit-form input[type="submit"] {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: #29b92e;
+    color: rgb(29, 27, 27);
+    cursor: pointer;
+}
+  
+.edit-form input[type="submit"]:hover {
+    background-color: #74df79;
+}
+.btn-primary {
+    background-color: #29b92e;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;  /* Add spacing between buttons */
+    display: block;  /* Make button take full width */
+}
+
+.btn-primary:hover {
+    background-color: #228b26;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-danger {
+    background-color: #e81313;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: block;  /* Make button take full width */
+}
+
+.btn-danger:hover {
+    background-color: #c41010;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }

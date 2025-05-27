@@ -4,7 +4,6 @@ from django.test import TestCase,Client
 from django.contrib.auth import get_user_model
 # Import reverse to generate URLs from URL patterns for testing endpoints
 from django.urls import reverse
-
 # Import the Post model to test its functionality and behavior
 from .models import Post
 
@@ -63,7 +62,53 @@ class BlogTest(TestCase):
         self.assertEqual(response.status_code, 200)
         # Verify the invalid post request returns 404 status code
         self.assertEqual(no_response.status_code, 404)
-        # Verify the response contains the expected post title
-        self.assertContains(response, 'A good title')
+        # Verify the response contains the expected post content
+        self.assertContains(response, 'Nice body content')
         # Verify the correct template is being used to render the response
         self.assertTemplateUsed(response, 'post_detail.html')
+    
+    def test_get_absolute_url(self):
+            # Test that the get_absolute_url method returns the correct URL for the post
+            # We know it's a Post object because it was created in setUp with Post.objects.create()
+        self.assertEqual(self.post.get_absolute_url(), '/post/1/')
+        
+    def test_post_create_view(self):
+
+            response= self.client.post(reverse('post_new'),{
+                'title':'New title',
+                'body':'New text',
+                'author':self.user,
+            })
+
+            self.assertEqual(response.status_code,200)
+            self.assertContains(response,'New title')
+            self.assertContains(response,'New text')
+        
+    def test_post_update_view(self):
+        self.client.login(username='testuser', password='secret')
+        
+        response = self.client.post(reverse('post_edit', args='1'), {
+            'title': 'Updated title',
+            'body': 'Updated text',
+        })
+        
+        self.assertEqual(response.status_code, 302)
+        # Check if redirected to the detail page
+        self.assertRedirects(response, '/post/1/')
+        # Fetch the updated post and verify its content
+        updated_post = Post.objects.get(id=1)
+        self.assertEqual(updated_post.title, 'Updated title')
+        self.assertEqual(updated_post.body, 'Updated text')
+
+    def test_post_delete_view(self):
+        response = self.client.post(reverse('post_delete',args='1'))
+        self.assertEqual(response.status_code, 302)
+        # Check if redirected to the home page
+        self.assertRedirects(response, '/')
+        # Verify the post was deleted
+        self.assertEqual(Post.objects.count(), 0)
+    
+    
+    
+
+        
